@@ -459,7 +459,7 @@
 
   <body class="font-montserrat bg-black text-white">
     <!-- Back to Top Indicator -->
-    <div class="back-to-top" id="back-to-top"></div>
+    <div class="back-to-top" id="back-to-top">Scroll Up</div>
 
     <!-- Hero Section -->
     <section class="section animated-gradient" id="hero-section">
@@ -524,7 +524,7 @@
 
         <!-- Scroll indicator for About to Experience -->
         <div class="scroll-indicator-bottom">
-          <p></p>
+          <p>Scroll Down</p>
         </div>
       </div>
 
@@ -532,7 +532,7 @@
       <div class="experience-section hidden" id="experience-content">
         <div class="experience-container">
           <div class="experience-item" id="exp-item-1">
-            <h3 class="experience-title">Freelance Graphic Designer & UI/UX</h3>
+            <h3 class="experience-title">Freelance Web Developer</h3>
             <p class="experience-description">
               Create simple websites such as company profiles or portfolio
               websites. Work according to the deadlines requested by clients.
@@ -560,7 +560,21 @@
           </div>
 
           <div class="experience-item" id="exp-item-3">
-            <h3 class="experience-title">Freelance Graphic Designer & UI/UX</h3>
+            <h3 class="experience-title">Freelance Videographer</h3>
+            <p class="experience-description">
+              Create simple websites such as company profiles or portfolio
+              websites. Work according to the deadlines requested by clients.
+            </p>
+            <div class="experience-skills">
+              <span class="skill-badge">Figma</span>
+              <span class="skill-badge">Photoshop</span>
+              <span class="skill-badge">CorelDraw</span>
+              <span class="skill-badge">CorelDraw</span>
+            </div>
+          </div>
+
+          <div class="experience-item" id="exp-item-4">
+            <h3 class="experience-title">Freelance Photographer</h3>
             <p class="experience-description">
               Create simple websites such as company profiles or portfolio
               websites. Work according to the deadlines requested by clients.
@@ -811,10 +825,15 @@
               document.getElementById("exp-item-2").classList.add("fade-up"),
             300,
           );
+          setTimeout(
+            () =>
+              document.getElementById("exp-item-3").classList.add("fade-up"),
+            500,
+          );
           setTimeout(() => {
-            document.getElementById("exp-item-3").classList.add("fade-up");
+            document.getElementById("exp-item-4").classList.add("fade-up");
             isTransitioning = false;
-          }, 500);
+          }, 700);
 
           // Reset scroll position
           window.scrollTo(0, 0);
@@ -832,6 +851,7 @@
         document.getElementById("exp-item-1").classList.add("fade-down");
         document.getElementById("exp-item-2").classList.add("fade-down");
         document.getElementById("exp-item-3").classList.add("fade-down");
+        document.getElementById("exp-item-4").classList.add("fade-down");
 
         setTimeout(() => {
           experienceContent.classList.add("hidden");
@@ -869,6 +889,9 @@
               .classList.remove("fade-up", "fade-down");
             document
               .getElementById("exp-item-3")
+              .classList.remove("fade-up", "fade-down");
+            document
+              .getElementById("exp-item-4")
               .classList.remove("fade-up", "fade-down");
 
             isTransitioning = false;

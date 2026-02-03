@@ -7,198 +7,877 @@
     <link href="style/css/style.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Andhika Fajri - Web Developer</title>
+    <style>
+      body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      .section {
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .hero-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        height: 100vh;
+        position: relative;
+      }
+
+      .center-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 5%;
+        position: relative;
+        z-index: 10;
+        text-align: center;
+      }
+
+      /* Text Hover Effects */
+      .hero-title {
+        position: relative;
+        cursor: pointer;
+        z-index: 1;
+        transition: color 0.4s ease 0.2s;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+        opacity: 1;
+      }
+
+      .hero-title::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: calc(100% + 20px);
+        background: #ffd700;
+        transition: width 0.6s ease;
+        z-index: -1;
+      }
+
+      .hero-title:hover::before {
+        width: calc(100% + 40px);
+      }
+
+      .hero-title:hover {
+        color: #000000;
+      }
+
+      /* Scroll Down Indicator */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 10;
+        opacity: 0;
+        animation: fadeInBounce 1s ease-out 0.5s forwards;
+      }
+
+      .scroll-indicator p {
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        color: #ffd700;
+      }
+
+      .scroll-indicator::after {
+        content: "↓";
+        display: block;
+        font-size: 24px;
+        color: #ffd700;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes fadeInBounce {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* About Section Layout */
+      .about-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        min-height: 100vh;
+        padding: 0;
+        position: relative;
+      }
+
+      .about-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1400px;
+        padding: 0 8%;
+        align-items: center;
+        width: 100%;
+      }
+
+      .scroll-indicator-bottom {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 10;
+        opacity: 1;
+      }
+
+      .scroll-indicator-bottom p {
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        color: #ffd700;
+      }
+
+      .scroll-indicator-bottom::after {
+        content: "↓";
+        display: block;
+        font-size: 24px;
+        color: #ffd700;
+        animation: bounce 2s infinite;
+      }
+
+      /* Experience Section */
+      .experience-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 5% 8%;
+        background: #000000;
+      }
+
+      .experience-container {
+        max-width: 1400px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .experience-item {
+        opacity: 0;
+        padding: 2.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 3px solid #ffd700;
+        transition: all 0.3s ease;
+      }
+
+      .experience-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateX(10px);
+      }
+
+      .experience-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #ffffff;
+      }
+
+      .experience-description {
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        color: #cccccc;
+      }
+
+      .experience-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+
+      .skill-badge {
+        background: #ffd700;
+        color: #000000;
+        padding: 0.5rem 1.2rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .skill-badge:hover {
+        background: #ffffff;
+        transform: translateY(-2px);
+      }
+
+      .about-text {
+        text-align: left;
+        z-index: 10;
+      }
+
+      .about-text p {
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+      }
+
+      .highlight {
+        color: #ffd700;
+        font-weight: bold;
+      }
+
+      .about-image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .image-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        height: 550px;
+        opacity: 0;
+      }
+
+      .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: relative;
+        z-index: 2;
+      }
+
+      .image-border {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 100%;
+        height: 100%;
+        border: 3px solid #ffd700;
+        z-index: 1;
+      }
+
+      /* Back to Top Indicator */
+      .back-to-top {
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%) rotate(180deg);
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 100;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .back-to-top.show {
+        opacity: 0.7;
+        pointer-events: auto;
+      }
+
+      .back-to-top:hover {
+        opacity: 1;
+      }
+
+      .back-to-top::after {
+        content: "↓";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        margin-top: 5px;
+      }
+
+      /* Fade animations */
+      .fade-in {
+        animation: fadeIn 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-out {
+        animation: fadeOut 0.8s forwards;
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+      }
+
+      /* Fade Up Animation */
+      .fade-up {
+        animation: fadeUp 1s forwards;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Fade Down Animation */
+      .fade-down {
+        animation: fadeDown 0.8s forwards;
+      }
+
+      @keyframes fadeDown {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+      }
+
+      /* Hidden class */
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 3.5rem !important;
+        }
+
+        .scroll-indicator {
+          bottom: 12%;
+        }
+
+        .scroll-indicator p {
+          font-size: 12px;
+        }
+
+        .about-container {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          padding: 0 5%;
+        }
+
+        .about-text {
+          text-align: center;
+          order: 2;
+        }
+
+        .about-text p {
+          font-size: 0.95rem;
+        }
+
+        .about-image {
+          order: 1;
+        }
+
+        .image-wrapper {
+          max-width: 350px;
+          height: 450px;
+        }
+
+        .back-to-top {
+          font-size: 12px;
+          top: 8%;
+        }
+
+        .experience-section {
+          padding: 10% 5%;
+        }
+
+        .experience-item {
+          padding: 1.5rem;
+        }
+
+        .experience-title {
+          font-size: 1.2rem;
+        }
+
+        .experience-description {
+          font-size: 0.9rem;
+        }
+
+        .skill-badge {
+          font-size: 0.75rem;
+          padding: 0.4rem 1rem;
+        }
+      }
+    </style>
   </head>
-  <body class="font-montserrat bg-black text-white fade-page">
-    <div class="flex min-h-screen">
-      <button class="hamburger-menu" id="hamburgerMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
 
-      <!-- Sidebar -->
-      <aside
-        class="sidebar w-64 h-screen border-r border-white/20 flex items-center justify-center fixed z-1"
-        id="sidebar"
-      >
-        <nav>
-          <ul class="space-y-8 text-left">
-            <li>
-              <a
-                href="index.html"
-                class="nav-link text-white/60 hover:text-white text-xl uppercase tracking-wider"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="about.html"
-                class="nav-link text-white/60 hover:text-white text-xl uppercase tracking-wider"
-                >About Me</a
-              >
-            </li>
-            <li>
-              <a
-                href="experience.html"
-                class="nav-link text-white font-bold text-xl uppercase tracking-wider"
-                >Experience</a
-              >
-            </li>
-            <li>
-              <a
-                href="projects.html"
-                class="nav-link text-white/60 hover:text-white text-xl uppercase tracking-wider"
-                >Project</a
-              >
-            </li>
-            <li>
-              <a
-                href="contact.html"
-                class="nav-link text-white/60 hover:text-white text-xl uppercase tracking-wider"
-                >Contact</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </aside>
+  <body class="font-montserrat bg-black text-white">
+    <!-- Back to Top Indicator -->
+    <div class="back-to-top" id="back-to-top">Scroll Up</div>
 
-      <!-- Main Content -->
-      <section
-        class="flex-1 px-6 md:px-16 lg:px-80 py-20 md:py-10 lg:py-10 overflow-y-auto"
-      >
-        <div class="max-w-4xl">
-          <!-- Experience Item 1 -->
-          <div class="mb-16">
-            <div class="flex items-start gap-6 mb-4">
-              <span class="text-white/60 text-lg font-light whitespace-nowrap"
-                >2022 - 2024</span
-              >
-              <div>
-                <h2 class="text-2xl font-bold mb-3">Freelance Web Developer</h2>
-                <p class="text-white/80 mb-4 leading-relaxed">
-                  Create simple websites such as company profiles or portfolio
-                  websites.<br />
-                  Work according to the deadlines requested by clients.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >HTML</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >CSS</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >JavaScript</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >PHP</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Wordpress</span
-                  >
-                </div>
-              </div>
-            </div>
+    <!-- Hero Section -->
+    <section class="section animated-gradient" id="hero-section">
+      <div class="hero-layout" id="hero-content">
+        <!-- Center Section -->
+        <div class="center-section">
+          <!-- Main Title -->
+          <h1
+            class="hero-title text-[3.5rem] md:text-[8rem] lg:text-[8rem] leading-none tracking-tight"
+            id="title-1"
+          >
+            HERE
+          </h1>
+          <br />
+          <h1
+            class="hero-title text-[3.5rem] md:text-[8rem] lg:text-[8rem] leading-none tracking-tight"
+            id="title-2"
+          >
+            MY PORTFOLIO
+          </h1>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-indicator">
+          <p>Scroll Down</p>
+        </div>
+      </div>
+
+      <!-- About Content (Hidden Initially) -->
+      <div class="about-section hidden" id="about-content">
+        <div class="about-container">
+          <div class="about-text">
+            <p id="para-1">
+              Hi, I'm <span class="highlight">Andhika Fajri</span>. I'm a
+              <span class="highlight">web developer</span>, more specifically a
+              <span class="highlight">front-end developer</span>. I have some
+              experience in creating company profile websites, portfolios, and
+              several other independent projects.
+            </p>
+
+            <p id="para-2">
+              I am familiar with programming languages such as
+              <span class="highlight">HTML, CSS, JavaScript, and PHP</span>. Not
+              only that, I am also familiar with creating websites using
+              <span class="highlight">WordPress</span>.
+            </p>
+
+            <p id="para-3">
+              Not only in programming, I'm also familiar with
+              <span class="highlight">UI/UX Design</span>. I'm usually using
+              <span class="highlight">Figma</span> as software design.
+            </p>
           </div>
 
-          <!-- Experience Item 2 -->
-          <div class="mb-16">
-            <div class="flex items-start gap-6 mb-4">
-              <span class="text-white/60 text-lg font-light whitespace-nowrap"
-                >2021 - 2025</span
-              >
-              <div>
-                <h2 class="text-2xl font-bold mb-3">
-                  Freelance Graphic Designer & UI/UX
-                </h2>
-                <p class="text-white/80 mb-4 leading-relaxed">
-                  Create simple websites such as company profiles or portfolio
-                  websites.<br />
-                  Work according to the deadlines requested by clients.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Figma</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Adobe Photoshop</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >CorelDraw</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Experience Item 3 -->
-          <div class="mb-16">
-            <div class="flex items-start gap-6 mb-4">
-              <span class="text-white/60 text-lg font-light whitespace-nowrap"
-                >2021 - 2023</span
-              >
-              <div>
-                <h2 class="text-2xl font-bold mb-3">Freelance Videographer</h2>
-                <p class="text-white/80 mb-4 leading-relaxed">
-                  Create simple websites such as company profiles or portfolio
-                  websites.<br />
-                  Work according to the deadlines requested by clients.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Adobe Premiere Pro</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Adobe After Effect</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Capcut</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Experience Item 4 -->
-          <div class="mb-16">
-            <div class="flex items-start gap-6 mb-4">
-              <span class="text-white/60 text-lg font-light whitespace-nowrap"
-                >2021 - 2023</span
-              >
-              <div>
-                <h2 class="text-2xl font-bold mb-3">Freelance Photographer</h2>
-                <p class="text-white/80 mb-4 leading-relaxed">
-                  Create simple websites such as company profiles or portfolio
-                  websites.<br />
-                  Work according to the deadlines requested by clients.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Adobe Lightroom</span
-                  >
-                  <span
-                    class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-medium"
-                    >Adobe Photoshop</span
-                  >
-                </div>
-              </div>
+          <div class="about-image">
+            <div class="image-wrapper" id="image-container">
+              <img src="style/img/me.JPG" alt="Andhika Fajri" />
+              <div class="image-border"></div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
-    <script src="style/js/script.js"></script>
+
+        <!-- Scroll indicator for About to Experience -->
+        <div class="scroll-indicator-bottom">
+          <p>Scroll Down</p>
+        </div>
+      </div>
+
+      <!-- Experience Content (Hidden Initially) -->
+      <div class="experience-section hidden" id="experience-content">
+        <div class="experience-container">
+          <div class="experience-item" id="exp-item-1">
+            <h3 class="experience-title">Freelance Graphic Designer & UI/UX</h3>
+            <p class="experience-description">
+              Create simple websites such as company profiles or portfolio
+              websites. Work according to the deadlines requested by clients.
+            </p>
+            <div class="experience-skills">
+              <span class="skill-badge">Figma</span>
+              <span class="skill-badge">Photoshop</span>
+              <span class="skill-badge">CorelDraw</span>
+              <span class="skill-badge">CorelDraw</span>
+            </div>
+          </div>
+
+          <div class="experience-item" id="exp-item-2">
+            <h3 class="experience-title">Freelance Graphic Designer & UI/UX</h3>
+            <p class="experience-description">
+              Create simple websites such as company profiles or portfolio
+              websites. Work according to the deadlines requested by clients.
+            </p>
+            <div class="experience-skills">
+              <span class="skill-badge">Figma</span>
+              <span class="skill-badge">Photoshop</span>
+              <span class="skill-badge">CorelDraw</span>
+              <span class="skill-badge">CorelDraw</span>
+            </div>
+          </div>
+
+          <div class="experience-item" id="exp-item-3">
+            <h3 class="experience-title">Freelance Graphic Designer & UI/UX</h3>
+            <p class="experience-description">
+              Create simple websites such as company profiles or portfolio
+              websites. Work according to the deadlines requested by clients.
+            </p>
+            <div class="experience-skills">
+              <span class="skill-badge">Figma</span>
+              <span class="skill-badge">Photoshop</span>
+              <span class="skill-badge">CorelDraw</span>
+              <span class="skill-badge">CorelDraw</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let isAboutPage = false;
+      let isExperiencePage = false;
+      let isTransitioning = false;
+      let scrollThreshold = 100; // Threshold untuk trigger transisi
+
+      const heroContent = document.getElementById("hero-content");
+      const aboutContent = document.getElementById("about-content");
+      const experienceContent = document.getElementById("experience-content");
+      const backToTop = document.getElementById("back-to-top");
+
+      // Wheel event untuk deteksi scroll
+      let scrollAccumulator = 0;
+
+      window.addEventListener(
+        "wheel",
+        (event) => {
+          if (isTransitioning) return;
+
+          // Di hero page, scroll ke bawah → About
+          if (!isAboutPage && !isExperiencePage && event.deltaY > 0) {
+            scrollAccumulator += event.deltaY;
+
+            if (scrollAccumulator > scrollThreshold) {
+              event.preventDefault();
+              goToAbout();
+              scrollAccumulator = 0;
+            }
+          }
+          // Di about page
+          else if (isAboutPage && !isExperiencePage) {
+            // Scroll ke atas saat di top → Hero
+            if (window.scrollY === 0 && event.deltaY < 0) {
+              event.preventDefault();
+              goBackToHero();
+            }
+            // Scroll ke bawah → Experience
+            else if (event.deltaY > 0) {
+              const aboutSection = document.getElementById("about-content");
+              const scrollBottom = window.scrollY + window.innerHeight;
+              const contentHeight = aboutSection.scrollHeight;
+
+              if (scrollBottom >= contentHeight - 50) {
+                event.preventDefault();
+                goToExperience();
+              }
+            }
+          }
+          // Di experience page, scroll ke atas saat di top → About
+          else if (
+            isExperiencePage &&
+            window.scrollY === 0 &&
+            event.deltaY < 0
+          ) {
+            event.preventDefault();
+            goBackToAbout();
+          }
+          // Reset accumulator jika scroll ke arah berlawanan
+          else if (!isAboutPage && !isExperiencePage && event.deltaY < 0) {
+            scrollAccumulator = 0;
+          }
+        },
+        { passive: false },
+      );
+
+      // Touch support untuk mobile
+      let touchStartY = 0;
+      let touchEndY = 0;
+
+      window.addEventListener("touchstart", (event) => {
+        touchStartY = event.touches[0].clientY;
+      });
+
+      window.addEventListener("touchmove", (event) => {
+        if (isTransitioning) return;
+        touchEndY = event.touches[0].clientY;
+      });
+
+      window.addEventListener("touchend", () => {
+        if (isTransitioning) return;
+
+        const swipeDistance = touchStartY - touchEndY;
+
+        // Swipe up (scroll down) di hero page → About
+        if (!isAboutPage && !isExperiencePage && swipeDistance > 50) {
+          goToAbout();
+        }
+        // Swipe down (scroll up) di about page saat di top → Hero
+        else if (
+          isAboutPage &&
+          !isExperiencePage &&
+          window.scrollY === 0 &&
+          swipeDistance < -50
+        ) {
+          goBackToHero();
+        }
+        // Swipe up (scroll down) di about page → Experience
+        else if (isAboutPage && !isExperiencePage && swipeDistance > 50) {
+          const aboutSection = document.getElementById("about-content");
+          const scrollBottom = window.scrollY + window.innerHeight;
+          const contentHeight = aboutSection.scrollHeight;
+
+          if (scrollBottom >= contentHeight - 50) {
+            goToExperience();
+          }
+        }
+        // Swipe down (scroll up) di experience page saat di top → About
+        else if (
+          isExperiencePage &&
+          window.scrollY === 0 &&
+          swipeDistance < -50
+        ) {
+          goBackToAbout();
+        }
+      });
+
+      // Back to top click handler
+      backToTop.addEventListener("click", () => {
+        if (isTransitioning) return;
+
+        if (isExperiencePage) {
+          goBackToAbout();
+        } else if (isAboutPage) {
+          goBackToHero();
+        }
+      });
+
+      function goToAbout() {
+        if (isTransitioning || isAboutPage) return;
+
+        isTransitioning = true;
+        isAboutPage = true;
+
+        // Fade out hero
+        document.getElementById("title-1").classList.add("fade-out");
+        document.getElementById("title-2").classList.add("fade-out");
+
+        setTimeout(() => {
+          heroContent.classList.add("hidden");
+          aboutContent.classList.remove("hidden");
+
+          // Show back to top indicator
+          backToTop.classList.add("show");
+
+          // Fade up about content
+          const para1 = document.getElementById("para-1");
+          const para2 = document.getElementById("para-2");
+          const para3 = document.getElementById("para-3");
+          const imageContainer = document.getElementById("image-container");
+
+          setTimeout(() => para1.classList.add("fade-up"), 100);
+          setTimeout(() => para2.classList.add("fade-up"), 300);
+          setTimeout(() => para3.classList.add("fade-up"), 500);
+          setTimeout(() => {
+            imageContainer.classList.add("fade-up");
+            isTransitioning = false;
+          }, 700);
+
+          // Reset scroll position
+          window.scrollTo(0, 0);
+        }, 800);
+      }
+
+      function goBackToHero() {
+        if (isTransitioning || !isAboutPage) return;
+
+        isTransitioning = true;
+        isAboutPage = false;
+
+        // Hide back to top indicator
+        backToTop.classList.remove("show");
+
+        // Fade down about content
+        document.getElementById("para-1").classList.add("fade-down");
+        document.getElementById("para-2").classList.add("fade-down");
+        document.getElementById("para-3").classList.add("fade-down");
+        document.getElementById("image-container").classList.add("fade-down");
+
+        setTimeout(() => {
+          aboutContent.classList.add("hidden");
+          heroContent.classList.remove("hidden");
+
+          // Remove fade classes from hero
+          document.getElementById("title-1").classList.remove("fade-out");
+          document.getElementById("title-2").classList.remove("fade-out");
+
+          // Reset about content classes
+          document
+            .getElementById("para-1")
+            .classList.remove("fade-up", "fade-down");
+          document
+            .getElementById("para-2")
+            .classList.remove("fade-up", "fade-down");
+          document
+            .getElementById("para-3")
+            .classList.remove("fade-up", "fade-down");
+          document
+            .getElementById("image-container")
+            .classList.remove("fade-up", "fade-down");
+
+          isTransitioning = false;
+
+          // Reset scroll
+          window.scrollTo(0, 0);
+        }, 800);
+      }
+
+      function goToExperience() {
+        if (isTransitioning || isExperiencePage) return;
+
+        isTransitioning = true;
+        isExperiencePage = true;
+        isAboutPage = false;
+
+        // Fade down about content
+        document.getElementById("para-1").classList.add("fade-down");
+        document.getElementById("para-2").classList.add("fade-down");
+        document.getElementById("para-3").classList.add("fade-down");
+        document.getElementById("image-container").classList.add("fade-down");
+
+        setTimeout(() => {
+          aboutContent.classList.add("hidden");
+          experienceContent.classList.remove("hidden");
+
+          // Fade up experience items
+          setTimeout(
+            () =>
+              document.getElementById("exp-item-1").classList.add("fade-up"),
+            100,
+          );
+          setTimeout(
+            () =>
+              document.getElementById("exp-item-2").classList.add("fade-up"),
+            300,
+          );
+          setTimeout(() => {
+            document.getElementById("exp-item-3").classList.add("fade-up");
+            isTransitioning = false;
+          }, 500);
+
+          // Reset scroll position
+          window.scrollTo(0, 0);
+        }, 800);
+      }
+
+      function goBackToAbout() {
+        if (isTransitioning || !isExperiencePage) return;
+
+        isTransitioning = true;
+        isExperiencePage = false;
+        isAboutPage = true;
+
+        // Fade down experience items
+        document.getElementById("exp-item-1").classList.add("fade-down");
+        document.getElementById("exp-item-2").classList.add("fade-down");
+        document.getElementById("exp-item-3").classList.add("fade-down");
+
+        setTimeout(() => {
+          experienceContent.classList.add("hidden");
+          aboutContent.classList.remove("hidden");
+
+          // Reset about content classes and fade up
+          document.getElementById("para-1").classList.remove("fade-down");
+          document.getElementById("para-2").classList.remove("fade-down");
+          document.getElementById("para-3").classList.remove("fade-down");
+          document
+            .getElementById("image-container")
+            .classList.remove("fade-down");
+
+          setTimeout(
+            () => document.getElementById("para-1").classList.add("fade-up"),
+            100,
+          );
+          setTimeout(
+            () => document.getElementById("para-2").classList.add("fade-up"),
+            300,
+          );
+          setTimeout(
+            () => document.getElementById("para-3").classList.add("fade-up"),
+            500,
+          );
+          setTimeout(() => {
+            document.getElementById("image-container").classList.add("fade-up");
+
+            // Reset experience items classes
+            document
+              .getElementById("exp-item-1")
+              .classList.remove("fade-up", "fade-down");
+            document
+              .getElementById("exp-item-2")
+              .classList.remove("fade-up", "fade-down");
+            document
+              .getElementById("exp-item-3")
+              .classList.remove("fade-up", "fade-down");
+
+            isTransitioning = false;
+          }, 700);
+
+          // Reset scroll
+          window.scrollTo(0, 0);
+        }, 800);
+      }
+    </script>
   </body>
 </html>

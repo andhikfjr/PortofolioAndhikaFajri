@@ -7,10 +7,151 @@
     <link href="style/css/style.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>About Me - Andhika Fajri</title>
+    <style>
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes float1 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(2);
+        }
+        33% {
+          transform: translate(30%, 20%) scale(2.1);
+        }
+        66% {
+          transform: translate(-20%, 30%) scale(3.9);
+        }
+      }
+
+      @keyframes float2 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(2);
+        }
+        33% {
+          transform: translate(-30%, -20%) scale(2.2);
+        }
+        66% {
+          transform: translate(20%, -30%) scale(2.8);
+        }
+      }
+
+      @keyframes float3 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(2);
+        }
+        33% {
+          transform: translate(20%, -30%) scale(2.9);
+        }
+        66% {
+          transform: translate(-30%, 20%) scale(2.1);
+        }
+      }
+
+      @keyframes float4 {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(2);
+        }
+        33% {
+          transform: translate(-20%, 30%) scale(2.1);
+        }
+        66% {
+          transform: translate(30%, -20%) scale(2.9);
+        }
+      }
+
+      .animated-gradient {
+        position: relative;
+        overflow: hidden;
+        background: #000000;
+      }
+
+      .gradient-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .blob1 {
+        width: 500px;
+        height: 500px;
+        background: #18005b;
+        top: -10%;
+        left: -10%;
+        animation: float1 5s ease-in-out infinite;
+      }
+
+      .blob2 {
+        width: 600px;
+        height: 600px;
+        background: #2d1770;
+        top: 20%;
+        right: -15%;
+        animation: float2 10s ease-in-out infinite;
+      }
+
+      .blob3 {
+        width: 550px;
+        height: 550px;
+        background: #000000;
+        bottom: -20%;
+        right: 20%;
+        animation: float3 7s ease-in-out infinite;
+      }
+
+      .blob4 {
+        width: 450px;
+        height: 450px;
+        background: #2a007e;
+        bottom: 10%;
+        left: 10%;
+        animation: float4 3s ease-in-out infinite;
+      }
+
+      .blob5 {
+        width: 400px;
+        height: 400px;
+        background: #6f0009;
+        top: 40%;
+        left: 40%;
+        animation: float1 8s ease-in-out infinite reverse;
+      }
+
+      .hero-title {
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .about-container {
+        min-height: 100vh;
+      }
+    </style>
   </head>
 
   <body class="font-montserrat bg-gray-900 text-white fade-page">
-    <div class="about-container">
+    <div class="about-container animated-gradient">
+      <!-- Gradient Blobs -->
+      <div class="gradient-blob blob1"></div>
+      <div class="gradient-blob blob2"></div>
+      <div class="gradient-blob blob3"></div>
+      <div class="gradient-blob blob4"></div>
+      <div class="gradient-blob blob5"></div>
+
       <!-- Hamburger Menu (Mobile Only) -->
       <button class="hamburger-menu" id="hamburgerMenu">
         <span></span>
@@ -35,14 +176,14 @@
             <li>
               <a
                 href="about.html"
-                class="nav-link text-white/60 font-bold hover:text-white text-xl uppercase tracking-wider"
+                class="nav-link text-white font-bold text-xl uppercase tracking-wider"
                 >About Me</a
               >
             </li>
             <li>
               <a
                 href="experience.html"
-                class="nav-link text-white/60 text-xl uppercase tracking-wider"
+                class="nav-link text-white/60 hover:text-white text-xl uppercase tracking-wider"
                 >Experience</a
               >
             </li>
@@ -69,7 +210,7 @@
         <div class="image-section-mobile">
           <div class="image-wrapper">
             <img src="style/img/me.JPG" alt="Andhika Fajri" />
-            <div class="image-border oklch(90.5% 0.182 98.111)"></div>
+            <div class="image-border"></div>
           </div>
         </div>
 
@@ -100,7 +241,7 @@
         <div class="image-section-desktop">
           <div class="image-wrapper">
             <img src="style/img/me.JPG" alt="Andhika Fajri" />
-            <div class="image-border CL"></div>
+            <div class="image-border"></div>
           </div>
         </div>
       </section>
